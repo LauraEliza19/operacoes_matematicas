@@ -5,9 +5,9 @@ Um aplicativo interativo para praticar operações matemáticas básicas (adiç�
 ## 📸 Screenshots
 
 <div align="center">
-  <img src="src/assets/imagens/img1.jpeg" alt="Tela Inicial" width="300"/>
-  <img src="src/assets/imagens/img2.jpeg" alt="Tela de Prática" width="300"/>
-  <img src="src/assets/imagens/img3.jpeg" alt="Tela de Prática" width="300"/>
+  <img src="src/assets/imagens/img1.jpeg" alt="Tela Inicial" width="200"/>
+  <img src="src/assets/imagens/img2.jpeg" alt="Tela de Prática" width="200"/>
+  <img src="src/assets/imagens/img3.jpeg" alt="Tela de Prática" width="200"/>
 </div>
 
 ## 🚀 Funcionalidades
