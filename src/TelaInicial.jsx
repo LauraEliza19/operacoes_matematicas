@@ -2,7 +2,31 @@ import React from 'react'
 import { CCard, CCardBody, CCardTitle, CButton } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import { cilPlus, cilMinus, cilX } from '@coreui/icons'
-import { customDivide } from './customIcon'
+
+const divideIcon = {
+  tag: 'svg',
+  attrs: {
+    xmlns: 'http://www.w3.org/2000/svg',
+    viewBox: '0 0 24 24',
+    width: '24',
+    height: '24',
+    fill: 'currentColor',
+  },
+  children: [
+    {
+      tag: 'circle',
+      attrs: { cx: '12', cy: '6', r: '2' },
+    },
+    {
+      tag: 'rect',
+      attrs: { x: '4', y: '11', width: '16', height: '2', rx: '1' },
+    },
+    {
+      tag: 'circle',
+      attrs: { cx: '12', cy: '18', r: '2' },
+    },
+  ],
+};
 
 function TelaInicial({ onSelecionar }) {
   const buttonStyle = {
@@ -16,6 +40,32 @@ function TelaInicial({ onSelecionar }) {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+  }
+
+  const divideIconStyle = {
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '10px',
+    width: '100%',
+    height: '100%',
+  }
+
+  const dotStyle = {
+    width: '10px',
+    height: '10px',
+    borderRadius: '50%',
+    background: '#3B006A',
+  }
+
+  const minusStyle = {
+    width: '50px',
+    height: '5px',
+    background: '#3B006A',
+    borderRadius: '1.5px',
   }
 
   const handleMouseEnter = (e) => {
@@ -40,7 +90,7 @@ function TelaInicial({ onSelecionar }) {
     { simbolo: '+', icone: cilPlus },
     { simbolo: '-', icone: cilMinus },
     { simbolo: '*', icone: cilX },
-    { simbolo: '/', icone: customDivide },
+    { simbolo: '/', icone: cilMinus },
   ]
 
   return (
@@ -177,15 +227,23 @@ function TelaInicial({ onSelecionar }) {
                   onMouseDown={handleMouseDown}
                   onMouseUp={handleMouseUp}
                 >
-                  <CIcon 
-                    icon={op.icone}
-                    size="xxl" 
-                    style={{ 
-                      color: '#3B006A',
-                      fontSize: '2.5rem',
-                      fontWeight: 'bold',
-                    }} 
-                  />
+                  {op.simbolo === '/' ? (
+                    <div style={divideIconStyle}>
+                      <div style={dotStyle} />
+                      <div style={minusStyle} />
+                      <div style={dotStyle} />
+                    </div>
+                  ) : (
+                    <CIcon 
+                      icon={op.icone}
+                      size="xxl" 
+                      style={{ 
+                        color: '#3B006A',
+                        fontSize: '2.5rem',
+                        fontWeight: 'bold',
+                      }} 
+                    />
+                  )}
                 </CButton>
               </div>
             ))}

@@ -77,8 +77,9 @@ function TelaPratica({ operacao, onVoltar }) {
   return (
     <div className="tela-pratica" style={{ 
       position: 'relative',
-      padding: '20px',
+      padding: '40px',
       background: 'linear-gradient(135deg, rgba(123, 63, 242, 0.1) 0%, rgba(124, 216, 227, 0.1) 100%)',
+      minHeight: '100vh',
     }}>
       {/* Efeitos de fundo */}
       <div style={{
@@ -116,13 +117,13 @@ function TelaPratica({ operacao, onVoltar }) {
         onClick={onVoltar}
         style={{
           position: 'absolute',
-          top: '20px',
-          left: '20px',
+          top: '1px',
+          left: '30px',
           zIndex: 2,
           background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
           border: 'none',
           borderRadius: '8px',
-          padding: '8px 16px',
+          padding: '10px 20px',
           color: 'white',
           cursor: 'pointer',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
@@ -136,9 +137,8 @@ function TelaPratica({ operacao, onVoltar }) {
         zIndex: 1,
         background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
         borderRadius: '16px',
-        top: '30px',
-        padding: '20px',
-        margin: '20px 0',
+        padding: '25px',
+        margin: '40px 0',
         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
       }}>
         <h3 style={{
@@ -159,8 +159,9 @@ function TelaPratica({ operacao, onVoltar }) {
         zIndex: 1,
         display: 'grid',
         gridTemplateColumns: 'repeat(2, 1fr)',
-        gap: '15px',
-        margin: '20px 0',
+        gap: '20px',
+        margin: '40px 0',
+        padding: '0 20px',
       }}>
         {questao.alternativas.map((alt, index) => (
           <button
@@ -197,13 +198,14 @@ function TelaPratica({ operacao, onVoltar }) {
             background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
             border: 'none',
             borderRadius: '12px',
-            padding: '12px 24px',
+            padding: '15px 30px',
             color: 'white',
             cursor: 'pointer',
             fontSize: '1.1rem',
             fontWeight: '500',
             boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
             transition: 'all 0.2s ease',
+            margin: '20px 0',
           }}
         >
           Verificar
@@ -216,8 +218,8 @@ function TelaPratica({ operacao, onVoltar }) {
           zIndex: 1,
           background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
           borderRadius: '16px',
-          padding: '20px',
-          margin: '20px 0',
+          padding: '25px',
+          margin: '40px 0',
           color: 'white',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
         }}>
