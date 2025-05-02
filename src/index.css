@@ -1,7 +1,7 @@
 body {
-  background: #4B0082; /* Roxo escuro */
+  background: linear-gradient(145deg, rgb(101, 41, 158) 40%, #3B006A 100%);
   color: white;
-  font-family: 'Arial', sans-serif;
+  font-family: 'Josefin Sans', sans-serif;
   margin: 0;
   padding: 0;
   text-align: center;
@@ -15,29 +15,7 @@ body {
 h2 {
   margin-bottom: 30px;
   font-size: 1.8rem;
-}
-
-.botoes-operacoes {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-button {
-  background-color: #00BFFF;
-  border: none;
-  border-radius: 50%;
-  width: 100px;
-  height: 100px;
-  font-size: 2rem;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-button:hover {
-  background-color: #1E90FF;
+  font-weight: 600;
 }
 
 .questao {
@@ -65,19 +43,13 @@ button:hover {
   padding: 10px 20px;
   border-radius: 8px;
   font-size: 1.2rem;
-}
-
-.botao-voltar {
-  background-color: #808080; /* Cinza */
+  font-weight: 500;
 }
 
 .botao-verificar:hover {
   background-color: #228B22;
 }
 
-.botao-voltar:hover {
-  background-color: #696969;
-}
 .enunciado {
   background-color: #6a0dad;
   padding: 20px;
@@ -108,7 +80,7 @@ button:hover {
 
 .selecionada {
   background-color: #00BFFF;
-  color: #4B0082;
+  color: #4B006A;
   font-weight: bold;
 }
 
@@ -120,6 +92,7 @@ button:hover {
   font-size: 1.2rem;
   cursor: pointer;
   margin-top: 10px;
+  font-weight: 500;
 }
 
 .botao-verificar:disabled {

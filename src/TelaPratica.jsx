@@ -75,20 +75,111 @@ function TelaPratica({ operacao, onVoltar }) {
   if (!questao) return null;
 
   return (
-    <div className="tela-pratica">
-      <button className="botao-voltar" onClick={onVoltar}>⬅</button>
+    <div className="tela-pratica" style={{ 
+      position: 'relative',
+      padding: '20px',
+      background: 'linear-gradient(135deg, rgba(123, 63, 242, 0.1) 0%, rgba(124, 216, 227, 0.1) 100%)',
+    }}>
+      {/* Efeitos de fundo */}
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'radial-gradient(circle at 20% 20%, rgba(123, 63, 242, 0.15) 0%, transparent 50%)',
+        zIndex: 0,
+      }} />
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'radial-gradient(circle at 80% 80%, rgba(124, 216, 227, 0.15) 0%, transparent 50%)',
+        zIndex: 0,
+      }} />
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        background: 'linear-gradient(45deg, rgba(255,255,255,0.15) 25%, transparent 25%, transparent 75%, rgba(255,255,255,0.15) 75%)',
+        backgroundSize: '60px 60px',
+        opacity: 0.2,
+        zIndex: 0,
+      }} />
 
-      <div className="enunciado">
-        <h3>{questao.enunciado}</h3>
+      <button 
+        className="botao-voltar" 
+        onClick={onVoltar}
+        style={{
+          position: 'absolute',
+          top: '20px',
+          left: '20px',
+          zIndex: 2,
+          background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
+          border: 'none',
+          borderRadius: '8px',
+          padding: '8px 16px',
+          color: 'white',
+          cursor: 'pointer',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        }}
+      >
+        ⬅
+      </button>
+
+      <div className="enunciado" style={{
+        position: 'relative',
+        zIndex: 1,
+        background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
+        borderRadius: '16px',
+        top: '30px',
+        padding: '20px',
+        margin: '20px 0',
+        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+      }}>
+        <h3 style={{
+          fontSize: '1.3rem',
+          fontWeight: '600',
+          letterSpacing: '1px',
+          fontFamily: 'Josefin Sans, sans-serif',
+          color: 'white',
+          margin: 0,
+          textShadow: '0 2px 4px rgba(0,0,0,0.2)',
+        }}>
+          {questao.enunciado}
+        </h3>
       </div>
 
-      <div className="alternativas">
+      <div className="alternativas" style={{
+        position: 'relative',
+        zIndex: 1,
+        display: 'grid',
+        gridTemplateColumns: 'repeat(2, 1fr)',
+        gap: '15px',
+        margin: '20px 0',
+      }}>
         {questao.alternativas.map((alt, index) => (
           <button
             key={index}
             className={`alternativa ${respostaSelecionada === alt ? 'selecionada' : ''}`}
             onClick={() => setRespostaSelecionada(alt)}
             disabled={mostrarResultado}
+            style={{
+              background: 'linear-gradient(145deg, rgb(124, 216, 227) 60%, rgb(76, 82, 170) 100%)',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '15px',
+              color: '#3B006A',
+              cursor: 'pointer',
+              fontSize: '1.1rem',
+              fontWeight: '500',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              transition: 'all 0.2s ease',
+            }}
           >
             {alt} balas
           </button>
@@ -96,27 +187,72 @@ function TelaPratica({ operacao, onVoltar }) {
       </div>
 
       {!mostrarResultado && (
-        <button className="botao-verificar" onClick={verificarResposta} disabled={respostaSelecionada === null}>
+        <button 
+          className="botao-verificar" 
+          onClick={verificarResposta} 
+          disabled={respostaSelecionada === null}
+          style={{
+            position: 'relative',
+            zIndex: 1,
+            background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
+            border: 'none',
+            borderRadius: '12px',
+            padding: '12px 24px',
+            color: 'white',
+            cursor: 'pointer',
+            fontSize: '1.1rem',
+            fontWeight: '500',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+            transition: 'all 0.2s ease',
+          }}
+        >
           Verificar
         </button>
       )}
 
-  {mostrarResultado && (
-    <div className="resultado fade-in">
-      {respostaSelecionada === questao.respostaCorreta ? (
-        <>
-          <Confetti width={window.innerWidth} height={window.innerHeight} />
-          <p>✅ Parabéns! Você acertou!</p>
-        </>
-      ) : (
-        <p>❌ Ops! Você errou.</p>
+      {mostrarResultado && (
+        <div className="resultado fade-in" style={{
+          position: 'relative',
+          zIndex: 1,
+          background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
+          borderRadius: '16px',
+          padding: '20px',
+          margin: '20px 0',
+          color: 'white',
+          boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        }}>
+          {respostaSelecionada === questao.respostaCorreta ? (
+            <>
+              <Confetti width={window.innerWidth} height={window.innerHeight} />
+              <p style={{ margin: '0 0 10px 0' }}>✅ Parabéns! Você acertou!</p>
+            </>
+          ) : (
+            <p style={{ margin: '0 0 10px 0' }}>❌ Ops! Você errou.</p>
+          )}
+          <p style={{ margin: '0 0 15px 0' }}>
+            <strong>Explicação:</strong> {questao.a} {questao.operacao} {questao.b} = {questao.respostaCorreta}
+          </p>
+
+          <button 
+            className="botao-nova" 
+            onClick={novaQuestao}
+            style={{
+              background: 'linear-gradient(145deg, rgb(124, 216, 227) 60%, rgb(76, 82, 170) 100%)',
+              border: 'none',
+              borderRadius: '12px',
+              padding: '12px 24px',
+              color: '#3B006A',
+              cursor: 'pointer',
+              fontSize: '1.1rem',
+              fontWeight: '500',
+              boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+              transition: 'all 0.2s ease',
+            }}
+          >
+            Nova Questão
+          </button>
+        </div>
       )}
-      <p><strong>Explicação:</strong> {questao.a} {questao.operacao} {questao.b} = {questao.respostaCorreta}</p>
-
-      <button className="botao-nova" onClick={novaQuestao}>Nova Questão</button>
-    </div>
-  )}
-
     </div>
   );
 }
