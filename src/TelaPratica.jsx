@@ -3,8 +3,8 @@ import Confetti from 'react-confetti';
 
 
 function gerarQuestao(operacao) {
-  const a = Math.floor(Math.random() * 20) + 1;
-  const b = Math.floor(Math.random() * 20) + 1;
+  const a = Math.floor(Math.random() * 21); // 0 to 20
+  const b = Math.floor(Math.random() * 21); // 0 to 20;
   let respostaCorreta;
   let enunciado;
 
@@ -163,29 +163,35 @@ function TelaPratica({ operacao, onVoltar }) {
         margin: '40px 0',
         padding: '0 20px',
       }}>
-        {questao.alternativas.map((alt, index) => (
+      {questao.alternativas.map((alt, index) => {
+        const isSelecionada = respostaSelecionada === alt;
+
+        return (
           <button
             key={index}
-            className={`alternativa ${respostaSelecionada === alt ? 'selecionada' : ''}`}
+            className={`alternativa ${isSelecionada ? 'selecionada' : ''}`}
             onClick={() => setRespostaSelecionada(alt)}
             disabled={mostrarResultado}
             style={{
-              background: 'linear-gradient(145deg, rgb(124, 216, 227) 60%, rgb(76, 82, 170) 100%)',
+              background: isSelecionada 
+                ? 'linear-gradient(145deg,rgb(255, 230, 0) 0%, #FFEC8B 100%)' // Dourado para selecionada
+                : 'linear-gradient(145deg, rgb(124, 216, 227) 60%, rgb(76, 82, 170) 100%)',
+              color: isSelecionada ? '#000000' : '#3B006A',
+              fontWeight: isSelecionada ? 'bold' : '500',
               border: 'none',
               borderRadius: '12px',
               padding: '15px',
-              color: '#3B006A',
               cursor: 'pointer',
               fontSize: '1.1rem',
-              fontWeight: '500',
               boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
               transition: 'all 0.2s ease',
             }}
           >
             {alt} balas
           </button>
-        ))}
-      </div>
+        );
+      })}
+    </div>
 
       {!mostrarResultado && (
         <button 
