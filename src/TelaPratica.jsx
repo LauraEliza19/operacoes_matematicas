@@ -3,10 +3,22 @@ import Confetti from 'react-confetti';
 
 
 function gerarQuestao(operacao) {
-  const a = Math.floor(Math.random() * 21); // 0 to 20
-  const b = Math.floor(Math.random() * 21); // 0 to 20;
+  let a = operacao === '*' ? Math.floor(Math.random() * 10) : Math.floor(Math.random() * 21);
+  let b;
+
+  if (operacao === '/' || operacao === '*') {
+    b = Math.floor(Math.random() * 10);
+  } else if (operacao === '*') {
+    b = Math.floor(Math.random() * 10);
+  } else {
+    b = Math.floor(Math.random() * 21);
+  }
+
   let respostaCorreta;
   let enunciado;
+
+  const x = operacao === '-' ? Math.max(a, b) : a;
+  const y = operacao === '-' ? Math.min(a, b) : b;
 
   switch (operacao) {
     case '+':
@@ -14,33 +26,35 @@ function gerarQuestao(operacao) {
       enunciado = `Se Luana tem ${a} balas e ganha mais ${b} balas, com quantas balas ela fica?`;
       break;
     case '-':
-      respostaCorreta = a - b;
-      enunciado = `Se Luana tem ${a} balas e dá ${b} balas para João, com quantas balas ela fica?`;
+      respostaCorreta = x - y;
+      enunciado = `Se Luana tem ${x} balas e dá ${y} balas para João, com quantas balas ela fica?`;
       break;
     case '*':
       respostaCorreta = a * b;
       enunciado = `Luana tem ${a} caixas, cada uma com ${b} balas. Quantas balas ela tem no total?`;
       break;
     case '/':
-      // Garantir que a divisão tenha resultado inteiro sem resto.
-      respostaCorreta = Math.floor(a / b);
+      b = Math.floor(Math.random() * 9) + 1;
+      const fator = Math.floor(Math.random() * 5);
+      a = b * fator;
+
+      respostaCorreta = a / b;
       enunciado = `Luana tem ${a} balas e quer dividir igualmente entre ${b} amigos. Quantas balas cada um receberá?`;
-      break;
+    break;
     default:
       respostaCorreta = 0;
       enunciado = 'Operação inválida';
   }
 
-  // Gerar alternativas erradas
-  const alternativas = [
-    respostaCorreta,
-    respostaCorreta + (Math.floor(Math.random() * 5) + 1),
-    respostaCorreta - (Math.floor(Math.random() * 5) + 1),
-    respostaCorreta + (Math.floor(Math.random() * 10) + 2)
-  ];
+  const alternativasSet = new Set();
+  alternativasSet.add(respostaCorreta);
 
-  // Embaralhar alternativas
-  alternativas.sort(() => Math.random() - 0.5);
+  while (alternativasSet.size < 4) {
+    const alternativa = Math.max(0, respostaCorreta + Math.floor(Math.random() * 11) - 5);
+    alternativasSet.add(alternativa);
+  }
+
+  const alternativas = Array.from(alternativasSet).sort(() => Math.random() - 0.5);
 
   return {
     enunciado,
@@ -51,7 +65,6 @@ function gerarQuestao(operacao) {
     operacao
   };
 }
-
 
 function TelaPratica({ operacao, onVoltar }) {
   const [questao, setQuestao] = useState(null);
@@ -174,7 +187,7 @@ function TelaPratica({ operacao, onVoltar }) {
             disabled={mostrarResultado}
             style={{
               background: isSelecionada 
-                ? 'linear-gradient(145deg,rgb(255, 230, 0) 0%, #FFEC8B 100%)' // Dourado para selecionada
+                ? 'linear-gradient(145deg,rgb(255, 230, 0) 0%, #FFEC8B 100%)'
                 : 'linear-gradient(145deg, rgb(124, 216, 227) 60%, rgb(76, 82, 170) 100%)',
               color: isSelecionada ? '#000000' : '#3B006A',
               fontWeight: isSelecionada ? 'bold' : '500',
@@ -187,7 +200,7 @@ function TelaPratica({ operacao, onVoltar }) {
               transition: 'all 0.2s ease',
             }}
           >
-            {alt} balas
+            {alt} {alt === 1 ? 'bala' : 'balas'}
           </button>
         );
       })}
