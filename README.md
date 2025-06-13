@@ -35,7 +35,7 @@ Um aplicativo interativo para praticar operações matemáticas básicas (adiç�
 
 1. Clone o repositório:
 ```bash
-git clone https://github.com/seu-usuario/operacoes_matematicas.git
+git clone https://github.com/LauraEliza19/operacoes_matematicas.git
 ```
 
 2. Instale as dependências:

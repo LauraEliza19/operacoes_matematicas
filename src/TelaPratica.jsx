@@ -70,6 +70,10 @@ function TelaPratica({ operacao, onVoltar }) {
   const [questao, setQuestao] = useState(null);
   const [respostaSelecionada, setRespostaSelecionada] = useState(null);
   const [mostrarResultado, setMostrarResultado] = useState(false);
+  const [questaoAtual, setQuestaoAtual] = useState(1);
+  const [totalAcertos, setTotalAcertos] = useState(0);
+  const [fimDoJogo, setFimDoJogo] = useState(false);
+
 
   useEffect(() => {
     setQuestao(gerarQuestao(operacao));
@@ -77,13 +81,52 @@ function TelaPratica({ operacao, onVoltar }) {
 
   const verificarResposta = () => {
     setMostrarResultado(true);
+    if (respostaSelecionada === questao.respostaCorreta) {
+      setTotalAcertos(prev => prev + 1);
+    }
   };
 
+
   const novaQuestao = () => {
-    setQuestao(gerarQuestao(operacao));
-    setRespostaSelecionada(null);
-    setMostrarResultado(false);
+    if (questaoAtual >= 5) {
+      setFimDoJogo(true);
+    } else {
+      setQuestao(gerarQuestao(operacao));
+      setRespostaSelecionada(null);
+      setMostrarResultado(false);
+      setQuestaoAtual(prev => prev + 1);
+    }
   };
+
+  if (fimDoJogo) {
+  return (
+    <div style={{ padding: '40px', textAlign: 'center', fontSize: '1.5rem' }}>
+      <h2>🎉 Fim do jogo!</h2>
+      <p>Você acertou <strong>{totalAcertos}</strong> de 5 questões.</p>
+      <button
+        onClick={() => {
+          setFimDoJogo(false);
+          setQuestaoAtual(1);
+          setTotalAcertos(0);
+          onVoltar();
+        }}
+        style={{
+          marginTop: '20px',
+          padding: '10px 20px',
+          fontSize: '2rem',
+          borderRadius: '8px',
+          border: 'none',
+          background: 'linear-gradient(145deg, #7B3FF2 0%, #5B2BB5 100%)',
+          color: 'white',
+          cursor: 'pointer'
+        }}
+      >
+        Jogar Novamente
+      </button>
+    </div>
+  );
+}
+
 
   if (!questao) return null;
 
